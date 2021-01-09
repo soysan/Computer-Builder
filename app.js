@@ -1,6 +1,6 @@
 const config = {
   parentId: "target",
-  url: "https://api.recursionist.io/builder/computers",
+  url: "https://api.recursionist.io/builder/computers?type=",
   cpu: {
     brand: "cpu_brand",
     model: "cpu_model",
@@ -23,7 +23,27 @@ const config = {
   display: "showPc",
 };
 
-class Controller {}
+class Controller {
+  static getCpuData = () => {
+    let url = config.url + "cpu";
+    const cpuData = fetch(url).then(res => res.json()).then(data => (data));
+    return cpuData;
+  }
+
+  static setCpuData = () => {
+    let data = Controller.getCpuData();
+    let brand = [];
+    let model = [];
+    for (let i in data) {
+      let curr = data[i];
+      console.log(curr)
+      if (brand[curr["Brand"]] === undefined) brand[curr["Brand"]] = curr["Brand"];
+      if (model[curr["Model"]] === undefined) model[curr["Model"]] = curr["Model"];
+    }
+    console.log(brand)
+    console.log(model)
+  }
+}
 
 class View {
   static initialDisplay() {
