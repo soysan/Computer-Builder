@@ -2,51 +2,77 @@ const config = {
   parentId: "target",
   url: "https://api.recursionist.io/builder/computers?type=",
   cpu: {
-    brand: "cpu_brand",
-    model: "cpu_model",
+    brand: "#cpu_brand",
+    model: "#cpu_model",
   },
   gpu: {
-    brand: "gpu_brand",
-    model: "gpu_model",
+    brand: "#gpu_brand",
+    model: "#gpu_model",
   },
   ram: {
-    num: "num",
-    brand: "ram_brand",
-    model: "ram_model",
+    num: "#num",
+    brand: "#ram_brand",
+    model: "#ram_model",
   },
   storage: {
-    disk: "disk",
-    storage: "storage",
-    brand: "disk_brand",
-    model: "disk_model",
+    disk: "#disk",
+    storage: "#storage",
+    brand: "#disk_brand",
+    model: "#disk_model",
   },
-  display: "showPc",
+  display: "#showPc",
 };
 
 class Controller {
-  static getCpuData = () => {
-    let url = config.url + "cpu";
-    const cpuData = fetch(url).then(res => res.json()).then(data => (data));
-    return cpuData;
+  static getBrand = data => {
+    let brand = {};
+    for (let i in data) {
+      let currData = data[i];
+      if (brand[currData.Brand] === undefined) brand[currData.Brand] = currData.Brand;
+    }
+    return brand;
   }
 
-  static setCpuData = () => {
-    let data = Controller.getCpuData();
-    let brand = [];
-    let model = [];
+  static getModel = data => {
+    let model = {};
     for (let i in data) {
-      let curr = data[i];
-      console.log(curr)
-      if (brand[curr["Brand"]] === undefined) brand[curr["Brand"]] = curr["Brand"];
-      if (model[curr["Model"]] === undefined) model[curr["Model"]] = curr["Model"];
+      let currData = data[i];
+      if (model[currData.Brand] === undefined) model[currData.Brand] = [currData.Model];
+      else model[currData.Brand].push(currData.Model);
     }
-    console.log(brand)
-    console.log(model)
+    return model;
   }
 }
 
 class View {
-  static initialDisplay() {
+  static getCpuData = () => {
+    let url = config.url + "cpu";
+    let brandOp = document.querySelectorAll(config.cpu.brand)[0];
+    const cpuData = fetch(url).then(res => res.json()).then(data => {
+      let brand = Controller.getBrand(data);
+      let model = Controller.getModel(data);
+      for (let i in brand) {
+        let op = document.createElement('option');
+        op.innerText = brand[i];
+        op.value = brand[i];
+        brandOp.append(op);
+      }
+
+      brandOp.addEventListener("change", () => {
+        let modelOp = document.querySelectorAll(config.cpu.model)[0];
+        modelOp.innerHTML = "";
+        let choseBrand = document.querySelectorAll(config.cpu.brand)[0].value;
+        for (let i = 0; i < model[choseBrand].length; i++) {
+          let op = document.createElement('option');
+            op.innerText = model[choseBrand][i];
+            op.value = model[choseBrand][i];
+            modelOp.append(op);
+        }
+      })
+    });
+  }
+
+  static initialDisplay = () => {
     let parent = document.getElementById(config.parentId);
     let main = document.createElement("div");
     main.innerHTML = `
@@ -128,3 +154,4 @@ class View {
 }
 
 View.initialDisplay();
+View.getCpuData()
