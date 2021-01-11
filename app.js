@@ -64,11 +64,39 @@ class View {
         let choseBrand = document.querySelectorAll(config.cpu.brand)[0].value;
         for (let i = 0; i < model[choseBrand].length; i++) {
           let op = document.createElement('option');
-            op.innerText = model[choseBrand][i];
-            op.value = model[choseBrand][i];
-            modelOp.append(op);
+          op.innerText = model[choseBrand][i];
+          op.value = model[choseBrand][i];
+          modelOp.append(op);
         }
-      })
+      });
+    });
+  }
+
+  static getGpuData = () => {
+    let url = config.url + "gpu";
+    let brandOp = document.querySelectorAll(config.gpu.brand)[0];
+    const gpuData = fetch(url).then(res => res.json()).then(data => {
+      let brand = Controller.getBrand(data);
+      console.log(brand)
+      let model = Controller.getModel(data);
+      for (let i in brand) {
+        let op = document.createElement('option');
+        op.innerText = brand[i];
+        op.value = brand[i];
+        brandOp.append(op);
+      }
+
+      brandOp.addEventListener("change", () => {
+        let modelOp = document.querySelectorAll(config.gpu.model)[0];
+        modelOp.innerHTML = "";
+        let choseBrand = document.querySelectorAll(config.gpu.brand)[0].value;
+        for (let i = 0; i < model[choseBrand].length; i++) {
+          let op = document.createElement('option');
+          op.innerText = model[choseBrand][i];
+          op.value = model[choseBrand][i];
+          modelOp.append(op);
+        }
+      });
     });
   }
 
@@ -155,3 +183,4 @@ class View {
 
 View.initialDisplay();
 View.getCpuData()
+View.getGpuData()
