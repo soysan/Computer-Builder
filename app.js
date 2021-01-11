@@ -48,7 +48,7 @@ class View {
   static getCpuData = () => {
     let url = config.url + "cpu";
     let brandOp = document.querySelectorAll(config.cpu.brand)[0];
-    const cpuData = fetch(url).then(res => res.json()).then(data => {
+    fetch(url).then(res => res.json()).then(data => {
       let brand = Controller.getBrand(data);
       let model = Controller.getModel(data);
       for (let i in brand) {
@@ -75,9 +75,8 @@ class View {
   static getGpuData = () => {
     let url = config.url + "gpu";
     let brandOp = document.querySelectorAll(config.gpu.brand)[0];
-    const gpuData = fetch(url).then(res => res.json()).then(data => {
+    fetch(url).then(res => res.json()).then(data => {
       let brand = Controller.getBrand(data);
-      console.log(brand)
       let model = Controller.getModel(data);
       for (let i in brand) {
         let op = document.createElement('option');
@@ -137,6 +136,10 @@ class View {
             <label for="num" class="p-2"><h5>How Many?</h5></label>
             <select class="form-control" id="num">
               <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
             </select>
             <label for="ram_brand" class="p-2"><h5>Brand</h5></label>
             <select class="form-control" id="ram_brand">
