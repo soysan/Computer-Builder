@@ -42,6 +42,11 @@ class Controller {
     }
     return model;
   }
+
+  static getLimitOfSlot = modelSpec => {
+    let str = modelSpec.substring(modelSpec.length - 6, modelSpec.length - 2);
+    return parseInt(str[0]);
+  }
 }
 
 class View {
@@ -99,6 +104,38 @@ class View {
     });
   }
 
+  static getRamData = () => {
+    let url = config.url + "ram";
+    let brandOp = document.querySelectorAll(config.ram.brand)[0];
+    let modelOp = document.querySelectorAll(config.ram.model)[0];
+    let numOp = document.querySelectorAll(config.ram.num)[0]; // 途中でhow many? を変えると挙動が変になる
+    fetch(url).then(res => res.json()).then(data => {
+      let brand = Controller.getBrand(data);
+      let model = Controller.getModel(data);
+      for (let i in brand) {
+        let op = document.createElement('option');
+        op.innerText = brand[i];
+        op.value = brand[i];
+        brandOp.append(op);
+      }
+
+      brandOp.addEventListener("change", () => {
+        modelOp.innerHTML = "";
+        let HowManySlot = parseInt(document.querySelectorAll(config.ram.num)[0].value);
+        console.log(HowManySlot)
+        let choseBrand = document.querySelectorAll(config.ram.brand)[0].value;
+        for (let i = 0; i < model[choseBrand].length; i++) {
+          let op = document.createElement('option');
+          if (Controller.getLimitOfSlot(model[choseBrand][i]) <= HowManySlot) {
+            op.innerText = model[choseBrand][i];
+            op.value = model[choseBrand][i];
+            modelOp.append(op);
+          }
+        }
+      });
+    });
+  }
+
   static initialDisplay = () => {
     let parent = document.getElementById(config.parentId);
     let main = document.createElement("div");
@@ -135,7 +172,6 @@ class View {
           <form class="form-inline">
             <label for="num" class="p-2"><h5>How Many?</h5></label>
             <select class="form-control" id="num">
-              <option>0</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -155,6 +191,8 @@ class View {
             <label for="disk" class="p-2"><h5>HDD or SSD</h5></label>
             <select class="form-control" id="disk">
               <option>choose Disk</option>
+              <option>HDD</option>
+              <option>SSD</option>
             </select>
             <label for="storage" class="p-2"><h5>Storage</h5></label>
             <select class="form-control" id="storage">
@@ -187,3 +225,4 @@ class View {
 View.initialDisplay();
 View.getCpuData()
 View.getGpuData()
+View.getRamData()
