@@ -140,13 +140,11 @@ class View {
       });
     });
   }
-  
-//  データが選択できない　トリガー
+
   static getStorageData = () => {
     document.querySelectorAll(config.storage.disk)[0].addEventListener('change', () => {
       let disk = document.querySelectorAll(config.storage.disk)[0].value;
-      let url = config.url + disk;
-      console.log(typeof disk)
+      let url = config.url + disk.toLowerCase();
       let brandOp = document.querySelectorAll(config.storage.brand)[0];
       let modelOp = document.querySelectorAll(config.storage.model)[0];
       let storage = document.querySelectorAll(config.storage.storage)[0];
