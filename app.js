@@ -47,6 +47,11 @@ class Controller {
     let str = modelSpec.substring(modelSpec.length - 6, modelSpec.length - 2);
     return parseInt(str[0]);
   }
+
+  static getStorage = modelSpec => {
+    let str = modelSpec.split(' ').filter(word => word.contains("GB" || "TB")).join('');
+    console.log(str);
+  }
 }
 
 class View {
@@ -105,33 +110,69 @@ class View {
   }
 
   static getRamData = () => {
-    let url = config.url + "ram";
-    let brandOp = document.querySelectorAll(config.ram.brand)[0];
-    let modelOp = document.querySelectorAll(config.ram.model)[0];
-    let numOp = document.querySelectorAll(config.ram.num)[0]; // 途中でhow many? を変えると挙動が変になる
-    fetch(url).then(res => res.json()).then(data => {
-      let brand = Controller.getBrand(data);
-      let model = Controller.getModel(data);
-      for (let i in brand) {
-        let op = document.createElement('option');
-        op.innerText = brand[i];
-        op.value = brand[i];
-        brandOp.append(op);
-      }
-
-      brandOp.addEventListener("change", () => {
-        modelOp.innerHTML = "";
-        let HowManySlot = parseInt(document.querySelectorAll(config.ram.num)[0].value);
-        console.log(HowManySlot)
-        let choseBrand = document.querySelectorAll(config.ram.brand)[0].value;
-        for (let i = 0; i < model[choseBrand].length; i++) {
+    document.querySelectorAll(config.ram.num)[0].addEventListener('change', () => {
+      let url = config.url + "ram";
+      let brandOp = document.querySelectorAll(config.ram.brand)[0];
+      let modelOp = document.querySelectorAll(config.ram.model)[0];
+      fetch(url).then(res => res.json()).then(data => {
+        let brand = Controller.getBrand(data);
+        let model = Controller.getModel(data);
+        for (let i in brand) {
           let op = document.createElement('option');
-          if (Controller.getLimitOfSlot(model[choseBrand][i]) <= HowManySlot) {
-            op.innerText = model[choseBrand][i];
-            op.value = model[choseBrand][i];
-            modelOp.append(op);
-          }
+          op.innerText = brand[i];
+          op.value = brand[i];
+          brandOp.append(op);
         }
+
+        brandOp.addEventListener("change", () => {
+          modelOp.innerHTML = "";
+          let HowManySlot = parseInt(document.querySelectorAll(config.ram.num)[0].value);
+          let choseBrand = document.querySelectorAll(config.ram.brand)[0].value;
+          for (let i = 0; i < model[choseBrand].length; i++) {
+            let op = document.createElement('option');
+            if (Controller.getLimitOfSlot(model[choseBrand][i]) <= HowManySlot) {
+              op.innerText = model[choseBrand][i];
+              op.value = model[choseBrand][i];
+              modelOp.append(op);
+            }
+          }
+        });
+      });
+    });
+  }
+  
+//  データが選択できない　トリガー
+  static getStorageData = () => {
+    document.querySelectorAll(config.storage.disk)[0].addEventListener('change', () => {
+      let disk = document.querySelectorAll(config.storage.disk)[0].value;
+      let url = config.url + disk;
+      console.log(typeof disk)
+      let brandOp = document.querySelectorAll(config.storage.brand)[0];
+      let modelOp = document.querySelectorAll(config.storage.model)[0];
+      let storage = document.querySelectorAll(config.storage.storage)[0];
+      fetch(url).then(res => res.json()).then(data => {
+        let brand = Controller.getBrand(data);
+        let model = Controller.getModel(data);
+
+        for (let i in brand) {
+          let op = document.createElement('option');
+          op.innerText = brand[i];
+          op.value = brand[i];
+          brandOp.append(op);
+        }
+
+        brandOp.addEventListener("change", () => {
+          modelOp.innerHTML = "";
+          let choseBrand = document.querySelectorAll(config.storage.brand)[0].value;
+          for (let i = 0; i < model[choseBrand].length; i++) {
+            let op = document.createElement('option');
+            if (Controller.getStorage(model[choseBrand][i])) {
+              op.innerText = model[choseBrand][i];
+              op.value = model[choseBrand][i];
+              modelOp.append(op);
+            }
+          }
+        });
       });
     });
   }
@@ -226,3 +267,4 @@ View.initialDisplay();
 View.getCpuData()
 View.getGpuData()
 View.getRamData()
+View.getStorageData()
