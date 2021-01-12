@@ -82,8 +82,6 @@ class Controller {
     }
     let sortedTb = tb.sort((a, b) => b - a).map(x => x.toString() + "TB");
     let sortedGb = gb.sort((a, b) => b - a).map(x => x.toString() + "GB");
-    console.log(sortedTb)
-    console.log(sortedGb)
     return sortedTb.concat(sortedGb);
   }
 
