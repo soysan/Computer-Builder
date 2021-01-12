@@ -359,22 +359,22 @@ class View {
         <div class="p-3 row">
           <div class="d-flex flex-column col">
             <div>
-              <h6><span class="badge badge-primary">CPU</span></h6>
+              <h3><span class="badge badge-primary">CPU</span></h3>
               <p>Brand :${spec.cpu.brand}</p>
               <p>Model :${spec.cpu.model}</p>
             </div>
             <div>
-              <h6><span class="badge badge-primary">GPU</span></h6>
+              <h3><span class="badge badge-primary">GPU</span></h3>
               <p>Brand :${spec.gpu.brand}</p>
               <p>Model :${spec.gpu.model}</p>
             </div>
             <div>
-              <h6><span class="badge badge-primary">RAM</span></h6>
+              <h3><span class="badge badge-primary">RAM</span></h3>
               <p>Brand :${spec.ram.brand}</p>
               <p>Model :${spec.ram.model}</p>
             </div>
             <div>
-              <h6><span class="badge badge-primary">DISK</span></h6>
+              <h3><span class="badge badge-primary">DISK</span></h3>
               <p>Disk : ${spec.disk.disk}</p>
               <p>Storage:${spec.disk.storage}</p>
               <p>Brand :${spec.disk.brand}</p>
