@@ -73,10 +73,10 @@ class Controller {
 }
 
 class Options {
-  cupBenchmark=0;
-  gpuBenchmark=0;
-  ramBenchmark=0;
-  diskBenchmark=0;
+  cupBenchmark = 0;
+  gpuBenchmark = 0;
+  ramBenchmark = 0;
+  diskBenchmark = 0;
 
   static getCpuData = () => {
     const url = config.url + "cpu";
@@ -175,7 +175,11 @@ class Options {
             }
           }
         });
-      });
+        modelOp.addEventListener('change', () => {
+          let pickedModel = document.querySelectorAll(config.ram.model)[0].value;
+          Options.ramBenchmark = Controller.getBenchmark(data, pickedModel);
+        });
+      })
     });
   }
 
