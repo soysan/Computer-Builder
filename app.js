@@ -309,6 +309,8 @@ class Options {
   }
 }
 class View {
+  static count = 1;
+
   static displayPcSpecs = () => {
     const pcSpec = document.querySelectorAll(config.show)[0];
     let btn = document.querySelectorAll(config.btn)[0];
@@ -349,6 +351,11 @@ class View {
       const img = imgs[Math.floor(Math.random() * (imgs.length + 1))];
       div.innerHTML =
         `
+        <div class="d-flex justify-content-around">
+          <h3>PC${View.count}</h3>
+          <h3><span class="badge badge-pill badge-success">Gaming</span>${Math.floor(gaming)}%</h3>
+          <h3><span class="badge badge-pill badge-warning">Working</span>${Math.floor(working)}%</h3>
+        </div>
         <div class="p-3 row">
           <div class="d-flex flex-column col">
             <div>
@@ -378,11 +385,8 @@ class View {
             <img src=${img} style="width: 100%; height: 80%">
           </div>
         </div>
-        <div class="d-flex justify-content-around">
-          <h5><span class="badge badge-pill badge-success">Gaming</span>${Math.floor(gaming)}%</h5>
-          <h5><span class="badge badge-pill badge-warning">Working</span>${Math.floor(working)}%</h5>
-        </div>
-      `
+      `;
+      View.count++;
       pcSpec.append(div);
       return pcSpec;
     });
