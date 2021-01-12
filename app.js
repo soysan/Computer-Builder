@@ -83,7 +83,27 @@ class Controller {
     let storage = document.querySelectorAll(config.storage.storage)[0].value;
     let diskBrand = document.querySelectorAll(config.storage.brand)[0].value;
     let diskModel = document.querySelectorAll(config.storage.model)[0].value;
-    
+    let spec = {
+      cpu: {
+        brand: cpuBrand,
+        model: cpuModel,
+      },
+      gpu: {
+        brand: gpuBrand,
+        model: gpuModel,
+      },
+      ram: {
+        brand: ramBrand,
+        model: ramModel,
+      },
+      disk: {
+        disk: disk,
+        storage: storage,
+        brand: diskBrand,
+        model: diskModel,
+      }
+    }
+    return spec;
   }
 }
 
