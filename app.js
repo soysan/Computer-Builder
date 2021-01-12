@@ -70,7 +70,7 @@ class View {
 
       brandOp.addEventListener("change", () => {
         let modelOp = document.querySelectorAll(config.cpu.model)[0];
-        modelOp.innerHTML = "";
+        modelOp.innerHTML = "<option>choose model</option>";
         let choseBrand = document.querySelectorAll(config.cpu.brand)[0].value;
         for (let i = 0; i < model[choseBrand].length; i++) {
           let op = document.createElement('option');
@@ -97,7 +97,7 @@ class View {
 
       brandOp.addEventListener("change", () => {
         let modelOp = document.querySelectorAll(config.gpu.model)[0];
-        modelOp.innerHTML = "";
+        modelOp.innerHTML = "<option>choose model<option>";
         let choseBrand = document.querySelectorAll(config.gpu.brand)[0].value;
         for (let i = 0; i < model[choseBrand].length; i++) {
           let op = document.createElement('option');
@@ -114,8 +114,8 @@ class View {
       const url = config.url + "ram";
       const brandOp = document.querySelectorAll(config.ram.brand)[0];
       const modelOp = document.querySelectorAll(config.ram.model)[0];
-      brandOp.innerHTML = '';
-      modelOp.innerHTML = '';
+      brandOp.innerHTML = '<option>choose brand</option>';
+      modelOp.innerHTML = '<option>choose model</option>';
 
       fetch(url).then(res => res.json()).then(data => {
         let brand = Controller.getBrand(data);
@@ -128,13 +128,11 @@ class View {
         }
 
         brandOp.addEventListener("change", () => {
-          // modelOp.innerHTML = "";
+          modelOp.innerHTML = "<option>choose model</option>";
           let HowManySlot = parseInt(document.querySelectorAll(config.ram.num)[0].value);
           let choseBrand = document.querySelectorAll(config.ram.brand)[0].value;
           for (let i = 0; i < model[choseBrand].length; i++) {
             let op = document.createElement('option');
-            // console.log(Controller.getLimitOfSlot(model[choseBrand][i]))
-            // console.log(HowManySlot);
             if (Controller.getLimitOfSlot(model[choseBrand][i]) <= HowManySlot) {
               op.innerText = model[choseBrand][i];
               op.value = model[choseBrand][i];
@@ -153,9 +151,9 @@ class View {
       const brandOp = document.querySelectorAll(config.storage.brand)[0];
       const modelOp = document.querySelectorAll(config.storage.model)[0];
       const storageOp = document.querySelectorAll(config.storage.storage)[0];
-      brandOp.innerHTML = '';
-      modelOp.innerHTML = '';
-      storageOp.innerHTML = '';
+      brandOp.innerHTML = "<option>choose brand</option>";
+      modelOp.innerHTML = "<option>choose model</option>";
+      storageOp.innerHTML = "<option>choose storage</option>";
 
       fetch(url).then(res => res.json()).then(data => {
         let brand = Controller.getBrand(data);
@@ -169,7 +167,7 @@ class View {
         }
 
         brandOp.addEventListener("change", () => {
-          modelOp.innerHTML = "";
+          modelOp.innerHTML = "<option>choose model</option>";
           let choseBrand = document.querySelectorAll(config.storage.brand)[0].value;
           for (let i = 0; i < model[choseBrand].length; i++) {
             let op = document.createElement('option');
