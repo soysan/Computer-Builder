@@ -338,21 +338,26 @@ class View {
         <div class="p-3 row">
           <div class="d-flex flex-column col">
             <div>
-              <h5>CPU</h5>
-              <h6>Brand :${spec.cpu.brand}  Model :${spec.cpu.model}</h6>
+              <h6>CPU</h6>
+              <p>Brand :${spec.cpu.brand}</p>
+              <p>Model :${spec.cpu.model}</p>
             </div>
             <div>
-              <h5>GPU</h5>
-              <h6>Brand :${spec.gpu.brand}  Model :${spec.gpu.model}</h6>
+              <h6>GPU</h6>
+              <p>Brand :${spec.gpu.brand}</p>
+              <p>Model :${spec.gpu.model}</p>
             </div>
             <div>
-              <h5>RAM</h5>
-              <h6>Brand :${spec.ram.brand}  Model :${spec.ram.model}</h6>
+              <h6>RAM</h6>
+              <p>Brand :${spec.ram.brand}</p>
+              <p>Model :${spec.ram.model}</p>
             </div>
             <div>
-              <h5>DISk</h5>
-              <h6>Disk : ${spec.disk.disk}  Storage:${spec.disk.storage}</h6>
-              <h6>Brand :${spec.disk.brand}  Model :${spec.disk.model}</h6>
+              <h6>DISk</h6>
+              <p>Disk : ${spec.disk.disk}</p>
+              <p>Storage:${spec.disk.storage}</p>
+              <p>Brand :${spec.disk.brand}</p>
+              <p>Model :${spec.disk.model}</p>
             </div>
           </div>
           <div class="col">
