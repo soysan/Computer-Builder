@@ -31,6 +31,7 @@ const imgs = [
   "https://us.123rf.com/450wm/lineartestpilot/lineartestpilot1603/lineartestpilot160334169/53891344-%E6%89%8B%E6%9B%B8%E3%81%8D%E3%81%AE%E3%83%86%E3%82%AF%E3%82%B9%E3%83%81%E3%83%A3%E6%BC%AB%E7%94%BB%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BC.jpg?ver=6",
   "https://illustimage.com/photo/649.png"
 ]
+
 const errorPic = "https://lh3.googleusercontent.com/proxy/VrzDdgv4B77u-hC8ILcB_UE6yBwWpDSrPTWxZAna4mr4pCHvtqSabvhy5PYeQwUx-8vbhN2VHOw";
 
 class Controller {
@@ -318,7 +319,7 @@ class View {
         div.innerHTML = `
         <div class="d-flex justify-content-center">
           <h4 class="col">Please choose your PC Spec</h4>
-          <img src=${errorPic}>
+          <img src=${errorPic} style="width: 100%; height: 80%" class="col">
         </div>
         `;
         pcSpec.append(div);
@@ -382,7 +383,6 @@ class View {
           <h5><span class="badge badge-pill badge-warning">Working</span>${Math.floor(working)}%</h5>
         </div>
       `
-      console.log(div)
       pcSpec.append(div);
       return pcSpec;
     });
@@ -397,7 +397,7 @@ class View {
       </header>
       <main>
         <div class="p-2">
-          <h3>Step 1: Select your CPU</h3>
+          <h3 class="col">Step 1: Select your CPU</h3>
           <form class="form-inline">
             <label for="cpu_brand" class="p-2"><h5>Brand</h5></label>
             <select class="form-control" id="cpu_brand">
