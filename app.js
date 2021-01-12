@@ -186,10 +186,11 @@ class View {
 
           brandOp.addEventListener("change", () => {
             modelOp.innerHTML = "<option>choose model</option>";
+            let pickedStorage = document.querySelectorAll(config.storage.storage)[0].value;
             let choseBrand = document.querySelectorAll(config.storage.brand)[0].value;
             for (let i = 0; i < model[choseBrand].length; i++) {
               let op = document.createElement('option');
-              if (Controller.getStorage(model[choseBrand][i])) {
+              if (model[choseBrand][i].includes(pickedStorage)) {
                 op.innerText = model[choseBrand][i];
                 op.value = model[choseBrand][i];
                 modelOp.append(op);
