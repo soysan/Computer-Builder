@@ -106,7 +106,7 @@ class View {
 
       brandOp.addEventListener("change", () => {
         let modelOp = document.querySelectorAll(config.gpu.model)[0];
-        modelOp.innerHTML = "<option>choose model<option>";
+        modelOp.innerHTML = "<option>choose model</option>";
         let choseBrand = document.querySelectorAll(config.gpu.brand)[0].value;
         for (let i = 0; i < model[choseBrand].length; i++) {
           let op = document.createElement('option');
