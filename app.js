@@ -72,6 +72,21 @@ class Controller {
     return storage;
   }
 
+  static sortStorage = stoObj => {
+    let storage = Object.keys(stoObj);
+    let tb = [];
+    let gb = [];
+    for (let i = 0; i < storage.length; i++){
+      if (storage[i].includes("TB")) tb.push(parseFloat(storage[i].replace("TB",'')));
+      else gb.push(parseFloat(storage[i].replace("GB",'')));
+    }
+    let sortedTb = tb.sort((a, b) => b - a).map(x => x.toString() + "TB");
+    let sortedGb = gb.sort((a, b) => b - a).map(x => x.toString() + "GB");
+    console.log(sortedTb)
+    console.log(sortedGb)
+    return sortedTb.concat(sortedGb);
+  }
+
   static getBenchmark = (data, picked) => {
     let benchmark = 0;
     for (let i in data) {
@@ -242,11 +257,12 @@ class Options {
         let brand = Controller.getBrand(data);
         let model = Controller.getModel(data);
         let storage = Controller.getStorageModel(data);
+        let sortedStorage = Controller.sortStorage(storage);
 
-        for (let i in storage) {
+        for (let i = 0; i < sortedStorage.length; i++) {
           let op = document.createElement('option');
-          op.innerHTML = storage[i];
-          op.value = storage[i];
+          op.innerHTML = sortedStorage[i];
+          op.value = sortedStorage[i];
           storageOp.append(op);
         }
 
@@ -303,7 +319,7 @@ class View {
       if (benchmarks === null) {
         div.innerHTML = `
         <div class="d-flex justify-content-center">
-          <h4>Please choose your PC Spec</h4>
+          <h4 class="col">Please choose your PC Spec</h4>
           <img src=${errorPic}>
         </div>
         `;
@@ -326,8 +342,7 @@ class View {
           working += benchmarks[i] * .1;
         }
         if (i === "disk") {
-          if(benchmarks[i] > 400)
-          gaming += benchmarks[i] * 0.025;
+          gaming += benchmarks[i] * .1;
           working += benchmarks[i] * 0.05;
         }
       }
