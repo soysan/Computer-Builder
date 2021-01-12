@@ -319,8 +319,8 @@ class View {
       let benchmarks = Options.setBenchmark();
       if (benchmarks === null) {
         div.innerHTML = `
-        <div class="d-flex justify-content-center">
-          <h4 class="col">Please choose your PC Spec</h4>
+        <div class="d-flex justify-content-center align-items-center">
+          <h3 class="col ">Please choose your PC Spec</h3>
           <img src=${errorPic} style="width: 100%; height: 80%" class="col">
         </div>
         `;
@@ -359,22 +359,22 @@ class View {
         <div class="p-3 row">
           <div class="d-flex flex-column col">
             <div>
-              <h6>CPU</h6>
+              <h6><span class="badge badge-primary">CPU</span></h6>
               <p>Brand :${spec.cpu.brand}</p>
               <p>Model :${spec.cpu.model}</p>
             </div>
             <div>
-              <h6>GPU</h6>
+              <h6><span class="badge badge-primary">GPU</span></h6>
               <p>Brand :${spec.gpu.brand}</p>
               <p>Model :${spec.gpu.model}</p>
             </div>
             <div>
-              <h6>RAM</h6>
+              <h6><span class="badge badge-primary">RAM</span></h6>
               <p>Brand :${spec.ram.brand}</p>
               <p>Model :${spec.ram.model}</p>
             </div>
             <div>
-              <h6>DISk</h6>
+              <h6><span class="badge badge-primary">DISK</span></h6>
               <p>Disk : ${spec.disk.disk}</p>
               <p>Storage:${spec.disk.storage}</p>
               <p>Brand :${spec.disk.brand}</p>
