@@ -235,6 +235,14 @@ class Options {
       });
     });
   }
+
+  static setBenchmark = () => {
+    let benchmarks = [Options.cupBenchmark, Options.gpuBenchmark, Options.ramBenchmark, Options.diskBenchmark];
+    for (let i of benchmarks) {
+      if (i === 0) return null;
+    }
+    return benchmarks;
+  }
 }
 class View {
   static initialDisplay = () => {
