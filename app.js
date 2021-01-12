@@ -44,7 +44,7 @@ class Controller {
   }
 
   static getLimitOfSlot = modelSpec => {
-    let slotLimit = modelSpec.substring(modelSpec.length - 6, modelSpec.length - 5);
+    let slotLimit = modelSpec.substring(modelSpec.length - 6, modelSpec.length - 4);
     return parseInt(slotLimit);
   }
 
@@ -116,7 +116,7 @@ class View {
       const modelOp = document.querySelectorAll(config.ram.model)[0];
       brandOp.innerHTML = '';
       modelOp.innerHTML = '';
-      
+
       fetch(url).then(res => res.json()).then(data => {
         let brand = Controller.getBrand(data);
         let model = Controller.getModel(data);
@@ -128,11 +128,13 @@ class View {
         }
 
         brandOp.addEventListener("change", () => {
-          modelOp.innerHTML = "";
+          // modelOp.innerHTML = "";
           let HowManySlot = parseInt(document.querySelectorAll(config.ram.num)[0].value);
           let choseBrand = document.querySelectorAll(config.ram.brand)[0].value;
           for (let i = 0; i < model[choseBrand].length; i++) {
             let op = document.createElement('option');
+            // console.log(Controller.getLimitOfSlot(model[choseBrand][i]))
+            // console.log(HowManySlot);
             if (Controller.getLimitOfSlot(model[choseBrand][i]) <= HowManySlot) {
               op.innerText = model[choseBrand][i];
               op.value = model[choseBrand][i];
