@@ -44,13 +44,13 @@ class Controller {
   }
 
   static getLimitOfSlot = modelSpec => {
-    let str = modelSpec.substring(modelSpec.length - 6, modelSpec.length - 2);
-    return parseInt(str[0]);
+    let slotLimit = modelSpec.substring(modelSpec.length - 6, modelSpec.length - 5);
+    return parseInt(slotLimit);
   }
 
   static getStorage = modelSpec => {
-    let str = modelSpec.split(' ').filter(word => word.contains("GB" || "TB")).join('');
-    console.log(str);
+    let storage = modelSpec.split(' ').filter(word => word.includes("GB") || word.includes("TB")).join('');
+    return storage;
   }
 }
 
