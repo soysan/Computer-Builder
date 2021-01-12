@@ -20,7 +20,8 @@ const config = {
     brand: "#disk_brand",
     model: "#disk_model",
   },
-  display: "#showPc",
+  btn: "#showPcs",
+  show: "#pcs",
 };
 
 class Controller {
@@ -70,13 +71,27 @@ class Controller {
     }
     return benchmark;
   }
+
+  static getSpec = () => {
+    let cpuBrand = document.querySelectorAll(config.cpu.brand)[0].value;
+    let cpuModel = document.querySelectorAll(config.cpu.model)[0].value;
+    let gpuBrand = document.querySelectorAll(config.gpu.brand)[0].value;
+    let gpuModel = document.querySelectorAll(config.gpu.model)[0].value;
+    let ramBrand = document.querySelectorAll(config.ram.brand)[0].value;
+    let ramModel = document.querySelectorAll(config.ram.model)[0].value;
+    let disk = document.querySelectorAll(config.storage.disk)[0].value;
+    let storage = document.querySelectorAll(config.storage.storage)[0].value;
+    let diskBrand = document.querySelectorAll(config.storage.brand)[0].value;
+    let diskModel = document.querySelectorAll(config.storage.model)[0].value;
+    
+  }
 }
 
 class Options {
-  cupBenchmark = 0;
-  gpuBenchmark = 0;
-  ramBenchmark = 0;
-  diskBenchmark = 0;
+  static cupBenchmark = 0;
+  static gpuBenchmark = 0;
+  static ramBenchmark = 0;
+  static diskBenchmark = 0;
 
   static getCpuData = () => {
     const url = config.url + "cpu";
@@ -237,14 +252,59 @@ class Options {
   }
 
   static setBenchmark = () => {
-    let benchmarks = [Options.cupBenchmark, Options.gpuBenchmark, Options.ramBenchmark, Options.diskBenchmark];
-    for (let i of benchmarks) {
-      if (i === 0) return null;
+    let benchmarks = {
+      cpu: Options.cupBenchmark,
+      gpu: Options.gpuBenchmark,
+      ram: Options.ramBenchmark,
+      disk: Options.diskBenchmark,
+    };
+    for (let i in benchmarks) {
+      if (benchmarks[i] === 0) return null;
     }
     return benchmarks;
   }
 }
 class View {
+  static displayPcSpecs = () => {
+    const pcSpec = document.querySelectorAll(config.show)[0];
+    let btn = document.querySelectorAll(config.btn)[0];
+    btn.addEventListener('click', () => {
+      let div = document.createElement('div');
+      let benchmarks = Options.setBenchmark();
+      if (benchmarks === null) {
+        div.innerHTML = "<h4>Please choose your PC Spec</h4>";
+        pcSpec.append(div);
+        console.log(pcSpec)
+        return pcSpec;
+      }
+      let gaming = 0;
+      let working = 0;
+      for (let i in benchmarks) {
+        if (i === "cpu") {
+          gaming += benchmarks[i] * .25;
+          working += benchmarks[i] * .6;
+        }
+        if (i === "gpu") {
+          gaming += benchmarks[i] * .6;
+          working += benchmarks[i] * .25;
+        }
+        if (i === "ram") {
+          gaming += benchmarks[i] * .12;
+          working += benchmarks[i] * .1;
+        }
+        if (i === "disk") {
+          if(benchmarks[i] > 400)
+          gaming += benchmarks[i] * 0.025;
+          working += benchmarks[i] * 0.05;
+        }
+      }
+      console.log(gaming, working);
+      div.innerHTML =
+        `
+        <
+      `
+    });
+  }
   static initialDisplay = () => {
     const parent = document.getElementById(config.parentId);
     let main = document.createElement("div");
@@ -317,13 +377,13 @@ class View {
               <option>choose model</option>
             </select>
           </form>
-          <div class="btn my-3">
+          <div id="showPcs" class="btn my-3">
             <button class="btn btn-info px-3">Add PC</button>
           </div>
         </div>
       </main>
       <footer>
-        <div id="showPc" class="h-30 bg-info text-white p-3">pc space</div>
+        <div id="pcs" class="h-30 bg-info text-white p-3"></div>
       </footer>
     </div>
         `;
@@ -337,3 +397,4 @@ Options.getCpuData();
 Options.getGpuData();
 Options.getRamData();
 Options.getStorageData();
+View.displayPcSpecs();
