@@ -114,6 +114,8 @@ class Options {
   static getGpuData = () => {
     const url = config.url + "gpu";
     const brandOp = document.querySelectorAll(config.gpu.brand)[0];
+    const modelOp = document.querySelectorAll(config.gpu.model)[0];
+
     fetch(url).then(res => res.json()).then(data => {
       let brand = Controller.getBrand(data);
       let model = Controller.getModel(data);
@@ -125,7 +127,6 @@ class Options {
       }
 
       brandOp.addEventListener("change", () => {
-        let modelOp = document.querySelectorAll(config.gpu.model)[0];
         modelOp.innerHTML = "<option>choose model</option>";
         let choseBrand = document.querySelectorAll(config.gpu.brand)[0].value;
         for (let i = 0; i < model[choseBrand].length; i++) {
@@ -135,6 +136,11 @@ class Options {
           modelOp.append(op);
         }
       });
+
+      modelOp.addEventListener('change', () => {
+        let pickedModel = document.querySelectorAll(config.gpu.model)[0].value;
+        Options.gpuBenchmark = Controller.getBenchmark(data, pickedModel);
+      })
     });
   }
 
