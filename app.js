@@ -228,6 +228,10 @@ class Options {
             }
           });
         });
+        modelOp.addEventListener('change', () => {
+          let pickedModel = document.querySelectorAll(config.storage.model)[0].value;
+          Options.diskBenchmark = Controller.getBenchmark(data, pickedModel);
+        })
       });
     });
   }
