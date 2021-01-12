@@ -56,8 +56,8 @@ class Controller {
 
 class View {
   static getCpuData = () => {
-    let url = config.url + "cpu";
-    let brandOp = document.querySelectorAll(config.cpu.brand)[0];
+    const url = config.url + "cpu";
+    const brandOp = document.querySelectorAll(config.cpu.brand)[0];
     fetch(url).then(res => res.json()).then(data => {
       let brand = Controller.getBrand(data);
       let model = Controller.getModel(data);
@@ -83,8 +83,8 @@ class View {
   }
 
   static getGpuData = () => {
-    let url = config.url + "gpu";
-    let brandOp = document.querySelectorAll(config.gpu.brand)[0];
+    const url = config.url + "gpu";
+    const brandOp = document.querySelectorAll(config.gpu.brand)[0];
     fetch(url).then(res => res.json()).then(data => {
       let brand = Controller.getBrand(data);
       let model = Controller.getModel(data);
@@ -111,9 +111,12 @@ class View {
 
   static getRamData = () => {
     document.querySelectorAll(config.ram.num)[0].addEventListener('change', () => {
-      let url = config.url + "ram";
-      let brandOp = document.querySelectorAll(config.ram.brand)[0];
-      let modelOp = document.querySelectorAll(config.ram.model)[0];
+      const url = config.url + "ram";
+      const brandOp = document.querySelectorAll(config.ram.brand)[0];
+      const modelOp = document.querySelectorAll(config.ram.model)[0];
+      brandOp.innerHTML = '';
+      modelOp.innerHTML = '';
+      
       fetch(url).then(res => res.json()).then(data => {
         let brand = Controller.getBrand(data);
         let model = Controller.getModel(data);
@@ -144,10 +147,14 @@ class View {
   static getStorageData = () => {
     document.querySelectorAll(config.storage.disk)[0].addEventListener('change', () => {
       let disk = document.querySelectorAll(config.storage.disk)[0].value;
-      let url = config.url + disk.toLowerCase();
-      let brandOp = document.querySelectorAll(config.storage.brand)[0];
-      let modelOp = document.querySelectorAll(config.storage.model)[0];
-      let storage = document.querySelectorAll(config.storage.storage)[0];
+      const url = config.url + disk.toLowerCase();
+      const brandOp = document.querySelectorAll(config.storage.brand)[0];
+      const modelOp = document.querySelectorAll(config.storage.model)[0];
+      const storageOp = document.querySelectorAll(config.storage.storage)[0];
+      brandOp.innerHTML = '';
+      modelOp.innerHTML = '';
+      storageOp.innerHTML = '';
+
       fetch(url).then(res => res.json()).then(data => {
         let brand = Controller.getBrand(data);
         let model = Controller.getModel(data);
@@ -176,7 +183,7 @@ class View {
   }
 
   static initialDisplay = () => {
-    let parent = document.getElementById(config.parentId);
+    const parent = document.getElementById(config.parentId);
     let main = document.createElement("div");
     main.innerHTML = `
     <div class="bg-light p-3">
