@@ -48,6 +48,15 @@ class Controller {
     return parseInt(slotLimit);
   }
 
+  static getStorageModel = data => {
+    let storage = {};
+    for (let i in data) {
+      let currData = Controller.getStorage(data[i].Model);
+      if (storage[currData] === undefined) storage[currData] = currData;
+    }
+    return storage;
+  }
+
   static getStorage = modelSpec => {
     let storage = modelSpec.split(' ').filter(word => word.includes("GB") || word.includes("TB")).join('');
     return storage;
@@ -158,25 +167,35 @@ class View {
       fetch(url).then(res => res.json()).then(data => {
         let brand = Controller.getBrand(data);
         let model = Controller.getModel(data);
+        let storage = Controller.getStorageModel(data);
 
-        for (let i in brand) {
+        for (let i in storage) {
           let op = document.createElement('option');
-          op.innerText = brand[i];
-          op.value = brand[i];
-          brandOp.append(op);
+          op.innerHTML = storage[i];
+          op.value = storage[i];
+          storageOp.append(op);
         }
 
-        brandOp.addEventListener("change", () => {
-          modelOp.innerHTML = "<option>choose model</option>";
-          let choseBrand = document.querySelectorAll(config.storage.brand)[0].value;
-          for (let i = 0; i < model[choseBrand].length; i++) {
+        storageOp.addEventListener('change', () => {
+          for (let i in brand) {
             let op = document.createElement('option');
-            if (Controller.getStorage(model[choseBrand][i])) {
-              op.innerText = model[choseBrand][i];
-              op.value = model[choseBrand][i];
-              modelOp.append(op);
-            }
+            op.innerText = brand[i];
+            op.value = brand[i];
+            brandOp.append(op);
           }
+
+          brandOp.addEventListener("change", () => {
+            modelOp.innerHTML = "<option>choose model</option>";
+            let choseBrand = document.querySelectorAll(config.storage.brand)[0].value;
+            for (let i = 0; i < model[choseBrand].length; i++) {
+              let op = document.createElement('option');
+              if (Controller.getStorage(model[choseBrand][i])) {
+                op.innerText = model[choseBrand][i];
+                op.value = model[choseBrand][i];
+                modelOp.append(op);
+              }
+            }
+          });
         });
       });
     });
@@ -218,6 +237,7 @@ class View {
           <form class="form-inline">
             <label for="num" class="p-2"><h5>How Many?</h5></label>
             <select class="form-control" id="num">
+              <option>choose slot number</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -269,7 +289,7 @@ class View {
 }
 
 View.initialDisplay();
-View.getCpuData()
-View.getGpuData()
-View.getRamData()
-View.getStorageData()
+View.getCpuData();
+View.getGpuData();
+View.getRamData();
+View.getStorageData();
