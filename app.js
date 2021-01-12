@@ -28,7 +28,7 @@ const imgs = [
   "https://www.sozai-library.com/wp-content/uploads/2016/04/7606-300x225.jpg",
   "https://publicdomainq.net/images/201802/20s/publicdomainq-0019100lxx.jpg",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCjyztNf0Tm1M720Kd0RWj6ACMWtjdYvVimg&usqp=CAU",
-  "https://us.123rf.com/450wm/lineartestpilot/lineartestpilot1603/lineartestpilot160334169/53891344-%E6%89%8B%E6%9B%B8%E3%81%8D%E3%81%AE%E3%83%86%E3%82%AF%E3%82%B9%E3%83%81%E3%83%A3%E6%BC%AB%E7%94%BB%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BC.jpg?ver=6",
+  "https://i1.wp.com/sozaikoujou.com/wordpress/wp-content/uploads/2015/04/th_kaden_ca_033.png?w=860&ssl=1",
   "https://illustimage.com/photo/649.png"
 ]
 
