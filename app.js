@@ -61,12 +61,28 @@ class Controller {
     let storage = modelSpec.split(' ').filter(word => word.includes("GB") || word.includes("TB")).join('');
     return storage;
   }
+
+  static getBenchmark = (data, picked) => {
+    let benchmark = 0;
+    for (let i in data) {
+      let currData = data[i];
+      if (currData.Model === picked) benchmark = currData.Benchmark;
+    }
+    return benchmark;
+  }
 }
 
-class View {
+class Options {
+  cupBenchmark=0;
+  gpuBenchmark=0;
+  ramBenchmark=0;
+  diskBenchmark=0;
+
   static getCpuData = () => {
     const url = config.url + "cpu";
     const brandOp = document.querySelectorAll(config.cpu.brand)[0];
+    const modelOp = document.querySelectorAll(config.cpu.model)[0];
+
     fetch(url).then(res => res.json()).then(data => {
       let brand = Controller.getBrand(data);
       let model = Controller.getModel(data);
@@ -78,7 +94,6 @@ class View {
       }
 
       brandOp.addEventListener("change", () => {
-        let modelOp = document.querySelectorAll(config.cpu.model)[0];
         modelOp.innerHTML = "<option>choose model</option>";
         let choseBrand = document.querySelectorAll(config.cpu.brand)[0].value;
         for (let i = 0; i < model[choseBrand].length; i++) {
@@ -87,6 +102,11 @@ class View {
           op.value = model[choseBrand][i];
           modelOp.append(op);
         }
+      });
+
+      modelOp.addEventListener("change", () => {
+        let pickedModel = document.querySelectorAll(config.cpu.model)[0].value;
+        Options.cupBenchmark = Controller.getBenchmark(data, pickedModel);
       });
     });
   }
@@ -201,7 +221,8 @@ class View {
       });
     });
   }
-
+}
+class View {
   static initialDisplay = () => {
     const parent = document.getElementById(config.parentId);
     let main = document.createElement("div");
@@ -280,7 +301,7 @@ class View {
         </div>
       </main>
       <footer>
-        <div id="showPc" class="h-30 bg-dark">pc space</div>
+        <div id="showPc" class="h-30 bg-info text-white p-3">pc space</div>
       </footer>
     </div>
         `;
@@ -290,7 +311,7 @@ class View {
 }
 
 View.initialDisplay();
-View.getCpuData();
-View.getGpuData();
-View.getRamData();
-View.getStorageData();
+Options.getCpuData();
+Options.getGpuData();
+Options.getRamData();
+Options.getStorageData();
