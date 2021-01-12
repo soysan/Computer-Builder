@@ -24,6 +24,15 @@ const config = {
   show: "#pcs",
 };
 
+const imgs = [
+  "https://www.sozai-library.com/wp-content/uploads/2016/04/7606-300x225.jpg",
+  "https://publicdomainq.net/images/201802/20s/publicdomainq-0019100lxx.jpg",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCjyztNf0Tm1M720Kd0RWj6ACMWtjdYvVimg&usqp=CAU",
+  "https://us.123rf.com/450wm/lineartestpilot/lineartestpilot1603/lineartestpilot160334169/53891344-%E6%89%8B%E6%9B%B8%E3%81%8D%E3%81%AE%E3%83%86%E3%82%AF%E3%82%B9%E3%83%81%E3%83%A3%E6%BC%AB%E7%94%BB%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97-%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BC.jpg?ver=6",
+  "https://illustimage.com/photo/649.png"
+]
+const errorPic = "https://lh3.googleusercontent.com/proxy/VrzDdgv4B77u-hC8ILcB_UE6yBwWpDSrPTWxZAna4mr4pCHvtqSabvhy5PYeQwUx-8vbhN2VHOw";
+
 class Controller {
   static getBrand = data => {
     let brand = {};
@@ -292,9 +301,13 @@ class View {
       let div = document.createElement('div');
       let benchmarks = Options.setBenchmark();
       if (benchmarks === null) {
-        div.innerHTML = "<h4>Please choose your PC Spec</h4>";
+        div.innerHTML = `
+        <div class="d-flex justify-content-center">
+          <h4>Please choose your PC Spec</h4>
+          <img src=${errorPic}>
+        </div>
+        `;
         pcSpec.append(div);
-        console.log(pcSpec)
         return pcSpec;
       }
       let gaming = 0;
@@ -318,11 +331,42 @@ class View {
           working += benchmarks[i] * 0.05;
         }
       }
-      console.log(gaming, working);
+      const spec = Controller.getSpec();
+      const img = imgs[Math.floor(Math.random() * (imgs.length + 1))];
       div.innerHTML =
         `
-        <
+        <div class="p-3 row">
+          <div class="d-flex flex-column col">
+            <div>
+              <h5>CPU</h5>
+              <h6>Brand :${spec.cpu.brand}  Model :${spec.cpu.model}</h6>
+            </div>
+            <div>
+              <h5>GPU</h5>
+              <h6>Brand :${spec.gpu.brand}  Model :${spec.gpu.model}</h6>
+            </div>
+            <div>
+              <h5>RAM</h5>
+              <h6>Brand :${spec.ram.brand}  Model :${spec.ram.model}</h6>
+            </div>
+            <div>
+              <h5>DISk</h5>
+              <h6>Disk : ${spec.disk.disk}  Storage:${spec.disk.storage}</h6>
+              <h6>Brand :${spec.disk.brand}  Model :${spec.disk.model}</h6>
+            </div>
+          </div>
+          <div class="col">
+            <img src=${img} style="width: 100%; height: 80%">
+          </div>
+        </div>
+        <div class="d-flex justify-content-around">
+          <h5><span class="badge badge-pill badge-success">Gaming</span>${Math.floor(gaming)}%</h5>
+          <h5><span class="badge badge-pill badge-warning">Working</span>${Math.floor(working)}%</h5>
+        </div>
       `
+      console.log(div)
+      pcSpec.append(div);
+      return pcSpec;
     });
   }
   static initialDisplay = () => {
