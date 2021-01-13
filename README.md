@@ -1,6 +1,6 @@
 # Computer Builder
 
-[Computer Builder](https://soysan.github.io/Computer-Builder/)
+# [Computer Builder](https://soysan.github.io/Computer-Builder/) <-link
 
 1. APIを使用して非同期処理でデータを取得。
 1. PCのSPECを各項目選択。
