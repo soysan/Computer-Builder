@@ -2,7 +2,7 @@
 
 [Computer Builder](https://soysan.github.io/Computer-Builder/)
 
-1. APIをしようして非同期処理でデータを取得。
+1. APIを使用して非同期処理でデータを取得。
 1. PCのSPECを各項目選択。
 1. ADD Buttonを押し、画面下部に出力。
 
