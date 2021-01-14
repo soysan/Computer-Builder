@@ -3,7 +3,7 @@ import Controller from "../controller/controller.js";
 import Options from "./options.js";
 
 class View {
-  count = 1;
+  static count = 1;
 
   static displayPcSpecs = () => {
     const pcSpec = document.querySelectorAll(config.show)[0];
