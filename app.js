@@ -6,7 +6,7 @@ app.listen(8080, () => {
     console.log('Running at Port 8080...');
 });
 
-app.use(express.static(path.join(__dirname, 'doc')));
+app.use(express.static(path.join(__dirname, 'docs')));
 
 app.use((req, res) => {
     res.sendStatus(404);
