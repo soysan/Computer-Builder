@@ -12,4 +12,4 @@
 - HashMapを使用し重複の削除
 - MVCモデルに沿った設計
 
-※見た目はbootstrapでざっくり作成。app.jsをメインにしている。
+※見た目はbootstrapでざっくり作成。index.jsをメインにしている。
