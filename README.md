@@ -20,7 +20,7 @@ CPU, GPU, RAM, Storageを選択し、画面に選択したスペックのPCを�
 [Computer Builder](https://soysan.github.io/Computer-Builder/) 
 
 ## Demo
-![demo]()
+![demo](demo.gif)
 
 ## Requirement
 Bootstrap4.5の使えるブラウザ
