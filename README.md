@@ -1,10 +1,12 @@
 # Computer Builder
+from [Recursion](https://recursionist.io/)
 
-### [Computer Builder](https://soysan.github.io/Computer-Builder/) 
+## Description
+CPU, GPU, RAM, Storageを選択し、画面に選択したスペックのPCを出力する。
 
 1. APIを使用して非同期処理でデータを取得。
-1. PCのSPECを各項目選択。
-1. ADD Buttonを押し、画面下部に出力。
+2. PCのSPECを各項目選択。
+3. ADD Buttonを押し、画面下部に出力。
 
 - JSONの扱い
 - Promise objectの扱い
@@ -13,3 +15,15 @@
 - MVCモデルに沿った設計
 
 ※見た目はbootstrapでざっくり作成。index.jsをメインにしている。
+
+## URL
+[Computer Builder](https://soysan.github.io/Computer-Builder/) 
+
+## Demo
+![demo]()
+
+## Requirement
+Bootstrap4.5の使えるブラウザ
+
+## Author
+[@soylove2](https://twitter.com/soylove2)
