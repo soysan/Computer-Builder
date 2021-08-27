@@ -25,14 +25,14 @@ const config = {
 };
 
 const imgs = [
-    "../pics/pc1.jpg",
-    "../pics/pc2.jpg",
-    "../pics/pc3.png",
-    "../pics/pc4.png",
-    "../pics/pc5.png"
+    "/pics/pc1.jpg",
+    "/pics/pc2.jpg",
+    "/pics/pc3.png",
+    "/pics/pc4.png",
+    "/pics/pc5.png"
 ]
 
-const errorPic = "../pics/err.png";
+const errorPic = "/pics/err.png";
 
 export  {
     config,
