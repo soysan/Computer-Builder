@@ -1,5 +1,5 @@
 # Computer Builder
-from [Recursion](https://recursionist.io/)
+from コンピュータサイエンスが学習できるアメリカ発のサービス　[Recursion](https://recursionist.io/)
 
 ## Description
 CPU, GPU, RAM, Storageを選択し、画面に選択したスペックのPCを出力する。
