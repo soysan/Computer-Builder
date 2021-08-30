@@ -80,15 +80,13 @@ class Controller {
     static displayResult = (pc) => {
         const pcSpec = document.querySelectorAll(config.show)[0];
         const div = document.createElement('div');
-        const img = imgs[Math.floor(Math.random() * (imgs.length + 1))];
+        const img = imgs[Math.floor(Math.random() * (imgs.length))];
         Controller.setChoseSpec(pc);
         const validatePc = Object.values(pc).every(val => val !== null);
         if (validatePc) {
             View.displayPcSpecs(pcSpec, div, img, pc);
-            pc.resetPc();
         } else {
             View.errSpec(pcSpec, div, errorPic);
-            pc.resetPc();
         }
         PCModel.count++;
     }
