@@ -1,4 +1,6 @@
-import { config } from "../params.js";
+import PCModel from "../model/model.js";
+import { config, errorPic, imgs } from "../params.js";
+import View from "../views/view.js";
 
 class Controller {
     static getBrand = data => {
@@ -61,38 +63,34 @@ class Controller {
         return benchmark;
     }
 
-    static getSpec = () => {
-        let cpuBrand = document.querySelectorAll(config.cpu.brand)[0].value;
-        let cpuModel = document.querySelectorAll(config.cpu.model)[0].value;
-        let gpuBrand = document.querySelectorAll(config.gpu.brand)[0].value;
-        let gpuModel = document.querySelectorAll(config.gpu.model)[0].value;
-        let ramBrand = document.querySelectorAll(config.ram.brand)[0].value;
-        let ramModel = document.querySelectorAll(config.ram.model)[0].value;
-        let disk = document.querySelectorAll(config.storage.disk)[0].value;
-        let storage = document.querySelectorAll(config.storage.storage)[0].value;
-        let diskBrand = document.querySelectorAll(config.storage.brand)[0].value;
-        let diskModel = document.querySelectorAll(config.storage.model)[0].value;
-        let spec = {
-            cpu: {
-                brand: cpuBrand,
-                model: cpuModel,
-            },
-            gpu: {
-                brand: gpuBrand,
-                model: gpuModel,
-            },
-            ram: {
-                brand: ramBrand,
-                model: ramModel,
-            },
-            disk: {
-                disk: disk,
-                storage: storage,
-                brand: diskBrand,
-                model: diskModel,
-            }
+    static setChoseSpec = (pc) => {
+        pc.cpuBrand = document.querySelectorAll(config.cpu.brand)[0].value;
+        pc.cpuModel = document.querySelectorAll(config.cpu.model)[0].value;
+        pc.gpuBrand = document.querySelectorAll(config.gpu.brand)[0].value;
+        pc.gpuModel = document.querySelectorAll(config.gpu.model)[0].value;
+        pc.ramCount = document.querySelectorAll(config.ram.num)[0].value;
+        pc.ramBrand = document.querySelectorAll(config.ram.brand)[0].value;
+        pc.ramModel = document.querySelectorAll(config.ram.model)[0].value;
+        pc.disk = document.querySelectorAll(config.storage.disk)[0].value;
+        pc.storage = document.querySelectorAll(config.storage.storage)[0].value;
+        pc.storageBrand = document.querySelectorAll(config.storage.brand)[0].value;
+        pc.storageModel = document.querySelectorAll(config.storage.model)[0].value;
+    }
+
+    static displayResult = (pc) => {
+        const pcSpec = document.querySelectorAll(config.show)[0];
+        const div = document.createElement('div');
+        const img = imgs[Math.floor(Math.random() * (imgs.length + 1))];
+        Controller.setChoseSpec(pc);
+        const validatePc = Object.values(pc).every(val => val !== null);
+        if (validatePc) {
+            View.displayPcSpecs(pcSpec, div, img, pc);
+            pc.resetPc();
+        } else {
+            View.errSpec(pcSpec, div, errorPic);
+            pc.resetPc();
         }
-        return spec;
+        PCModel.count++;
     }
 }
 

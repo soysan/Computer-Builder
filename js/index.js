@@ -1,9 +1,11 @@
-import Options from "./views/options.js";
+import Options from "./controller/options.js";
 import View from "./views/view.js";
+import PCModel from "./model/model.js";
 
-View.initialDisplay();
-Options.getCpuData();
-Options.getGpuData();
-Options.getRamData();
-Options.getStorageData();
-View.displayPcSpecs();
+const pc = new PCModel;
+
+View.initialDisplay(pc);
+Options.getCpuData(pc);
+Options.getGpuData(pc);
+Options.getRamData(pc);
+Options.getStorageData(pc);
