@@ -25,8 +25,8 @@ const config = {
 };
 
 const imgs = [
-    "../pics/pc1.jpg",
-    "../pics/pc2.jpg",
+    "../pics/pc1.png",
+    "../pics/pc2.png",
     "../pics/pc3.png",
     "../pics/pc4.png",
     "../pics/pc5.png"
