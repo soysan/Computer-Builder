@@ -24,7 +24,6 @@ class PCModel {
     const gpu = this.gpuBenchMark * .6;
     const ram = this.ramBenchMark * .125;
     const storage = this.disk === 'SSD' ? this.storageBenchMark * .1 : this.storageBenchMark * .025;
-    console.log(this.cpuBenchMark, this.gpuBenchMark, this.ramBenchMark, this.storageBenchMark)
     return Math.floor(cpu + gpu + ram + storage);
   }
 
@@ -33,7 +32,6 @@ class PCModel {
     const gpu = parseInt(this.gpuBenchMark * .25);
     const ram = parseInt(this.ramBenchMark * .1);
     const storage = parseInt(this.storageBenchMark * .5)
-    console.log(cpu, gpu, ram, storage)
     return Math.floor(cpu + gpu + ram + storage);
   }
 
