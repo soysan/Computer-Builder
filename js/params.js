@@ -25,11 +25,12 @@ const config = {
 };
 
 const imgs = [
-    "../pics/pc1.png",
-    "../pics/pc2.png",
-    "../pics/pc3.png",
-    "../pics/pc4.png",
-    "../pics/pc5.png"
+    "https://github.com/soysan/Computer-Builder/blob/main/pics/pc1.png?raw=true",
+    "https://github.com/soysan/Computer-Builder/blob/main/pics/pc2.png?raw=true",
+    "https://github.com/soysan/Computer-Builder/blob/main/pics/pc3.png?raw=true",
+    "https://github.com/soysan/Computer-Builder/blob/main/pics/pc4.png?raw=true
+",
+    "https://github.com/soysan/Computer-Builder/blob/main/pics/pc5.png?raw=true"
 ]
 
 const errorPic = "https://github.com/soysan/Computer-Builder/blob/main/pics/err.png?raw=true";
