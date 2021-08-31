@@ -28,8 +28,7 @@ const imgs = [
     "https://github.com/soysan/Computer-Builder/blob/main/pics/pc1.png?raw=true",
     "https://github.com/soysan/Computer-Builder/blob/main/pics/pc2.png?raw=true",
     "https://github.com/soysan/Computer-Builder/blob/main/pics/pc3.png?raw=true",
-    "https://github.com/soysan/Computer-Builder/blob/main/pics/pc4.png?raw=true
-",
+    "https://github.com/soysan/Computer-Builder/blob/main/pics/pc4.png?raw=true",
     "https://github.com/soysan/Computer-Builder/blob/main/pics/pc5.png?raw=true"
 ]
 
