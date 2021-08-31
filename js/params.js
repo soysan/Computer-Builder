@@ -34,7 +34,7 @@ const imgs = [
 
 const errorPic = "https://github.com/soysan/Computer-Builder/blob/main/pics/err.png?raw=true";
 
-export  {
+export {
     config,
     imgs,
     errorPic
