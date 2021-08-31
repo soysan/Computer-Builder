@@ -32,7 +32,7 @@ const imgs = [
     "../pics/pc5.png"
 ]
 
-const errorPic = "../pics/err.png";
+const errorPic = "https://github.com/soysan/Computer-Builder/blob/main/pics/err.png?raw=true";
 
 export  {
     config,
